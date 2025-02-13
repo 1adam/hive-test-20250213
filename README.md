@@ -9,6 +9,8 @@ I've chosen to deploy the nginx image in ECS, with an ALB in front. This is a go
 
 Only the Load Balancer is reachable externally, via port 80. It's best not to allow direct access to the server instances themselves (whether it's EC2, ECS, etc.) for security reasons.
 
+The LB logs are written to S3, in case analysis is required. The ECS tasks log output to CloudWatch.
+
 Other than tuning the CPU/MEM and Desired count, and a volume to support proper content, I think this solution is highly durable and scalable.  If more "extreme" scale is needed, it might make sense to go with EKS over ECS, but in my experience ECS is very performant, even for large-scale deployments of a simple application (eg. webserver).
 
 
