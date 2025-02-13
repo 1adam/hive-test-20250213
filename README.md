@@ -8,12 +8,12 @@ I've chosen to deploy the nginx image in ECS, with an ALB in front. This is a go
 
 Only the Load Balancer is reachable externally, via port 80. It's best not to allow direct access to the server instances themselves (whether it's EC2, ECS, etc.) for security reasons.
 
-Other than tuning the CPU/MEM and Desired count, and a volume to support proper content, I think this solution is extremely durable and scalable.  If more "extreme" scale is needed, it might make sense to go with EKS over ECS, but in my experience ECS is very performant, even for large-scale deployments of a simple application (eg. webserver).
+Other than tuning the CPU/MEM and Desired count, and a volume to support proper content, I think this solution is highly durable and scalable.  If more "extreme" scale is needed, it might make sense to go with EKS over ECS, but in my experience ECS is very performant, even for large-scale deployments of a simple application (eg. webserver).
 
 
 ## Assumptions Made
 - The state is managed already, as per the instructions (as it is, this project will create a local state file)
-
+- No "real" content needs to be served (only the nginx page is required; only need to get the service running)
 
 ## Areas for Improvement, Given More Time
 - Outbound access is currently allowed to 0.0.0.0/0:443. This is not good practice, but it's in place to allow ECS to pull the docker image. Normally I would restrict access using an outbound proxy (something like Squidproxy) or only allow ECS to hit ECR for images.
