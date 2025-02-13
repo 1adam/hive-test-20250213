@@ -5,7 +5,7 @@
 - This was tested with Terraform `1.10.5` but should be compatible with some older versions.
 
 ## Chosen Approach and Rationale
-I've chosen to deploy the nginx image in ECS, with an ALB in front. This is a good choice because it allows the ECS tasks to scale both vertically (cpu and memory tunables) as well as horizontally (desired count). These specific tunables can all be adjusted by way of variables.  The load balancer front allows for the backend to be scaled to whatever extent is necessary while maintaining relative simplicity in its implementation.  EKS/Kubernetes felt like overkill given this simple setup (I don't think that degree of abstracton is required for a simple webserver scenario). 
+I've chosen to deploy the nginx image in ECS, with an ALB in front. This is a good choice because it allows the ECS tasks to scale both vertically (cpu and memory tunables) as well as horizontally (desired count) behind a single public endpoint. These specific tunables can all be adjusted by way of variables.  The load balancer front allows for the backend to be scaled to whatever extent is necessary while maintaining relative simplicity in its implementation.  EKS/Kubernetes felt like overkill given this simple setup (I don't think that degree of abstracton is required for a simple webserver scenario). 
 
 Only the Load Balancer is reachable externally, via port 80. It's best not to allow direct access to the server instances themselves (whether it's EC2, ECS, etc.) for security reasons.
 
