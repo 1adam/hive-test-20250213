@@ -15,7 +15,7 @@ Other than tuning the CPU/MEM and Desired count, and a volume to support proper 
 ## Assumptions Made
 - The state is managed already, as per the instructions (as it is, this project will create a local state file)
 - No "real" content needs to be served (only the nginx page is required; only need to get the service running)
-- A reasonably recent version of Terraform is used (this was tested with `1.10.5`)`
+- A reasonably recent version of Terraform is used (this was tested with `1.10.5`)
 
 ## Areas for Improvement, Given More Time
 - Outbound access is currently allowed to 0.0.0.0/0:443. This is not good practice, but it's in place to allow ECS to pull the docker image. Normally I would restrict access using an outbound proxy (something like Squidproxy) or only allow ECS to hit ECR for images.
