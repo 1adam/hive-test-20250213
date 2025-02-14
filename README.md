@@ -25,3 +25,4 @@ Other than tuning the CPU/MEM and Desired count, and a volume to support proper 
 - More robust health checks on the Load Balancer/ Target Group and ECS levels.
 - Support for mapping a volume to the ECS tasks, to properly serve actual content rather than the default "Welcome to nginx" page.
 - More use of CloudWatch -- dashboards, alarms around KPIs/SLOs, etc.
+- Auto-scaling of desired_tasks in response to load KPIs
