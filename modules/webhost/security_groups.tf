@@ -10,7 +10,7 @@ resource "aws_security_group" "webserver" {
   )
 }
 
-# allow all inbound on port 80
+# allow inbound to webservers on port 80 from LB SG
 resource "aws_security_group_rule" "webserver_http_ingress" {
   security_group_id        = aws_security_group.webserver.id
   type                     = "ingress"
@@ -44,7 +44,7 @@ resource "aws_security_group" "webserver_lb" {
   )
 }
 
-# Load balancer listen on given port
+# Load balancer listen on given port, allow inbound on 80 from all
 resource "aws_security_group_rule" "webserver_lb_http_ingress" {
   security_group_id = aws_security_group.webserver_lb.id
   type              = "ingress"
@@ -55,7 +55,7 @@ resource "aws_security_group_rule" "webserver_lb_http_ingress" {
   description       = "Ingress port ${var.ecs_port} to LB from ALL"
 }
 
-# Load balancer communicate with ECS tasks in the two subnets
+# Load balancer communicate with ECS tasks in the two subnets on tcp/80
 resource "aws_security_group_rule" "webserver_lb_http_egress_local" {
   security_group_id = aws_security_group.webserver_lb.id
   type              = "egress"
